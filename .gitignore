@@ -45,3 +45,4 @@ out/
 .settings
 .classpath
 .factorypath
+gradle.properties
