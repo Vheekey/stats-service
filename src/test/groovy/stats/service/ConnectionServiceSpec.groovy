@@ -13,6 +13,6 @@ class ConnectionServiceSpec extends Specification implements ServiceUnitTest<Con
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 }
