@@ -3,7 +3,7 @@ package stats.service
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class ConnectionServiceSpec extends Specification implements ServiceUnitTest<ConnectionService>{
+class BookServiceSpec extends Specification implements ServiceUnitTest<BookService>{
 
     def setup() {
     }

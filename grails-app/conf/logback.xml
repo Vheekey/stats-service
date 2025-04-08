@@ -26,6 +26,19 @@
         </encoder>
     </appender>
 
+    <appender name="KAFKA-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/kafka.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger{36} : %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/archived/kafka.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
     <root level="error">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
@@ -37,6 +50,11 @@
     <!-- Reduce noise from other libraries -->
     <logger name="org.hibernate" level="WARN" />
     <logger name="org.springframework" level="WARN" />
+    <logger name="org.apache.kafka" level="DEBUG" />
+    <logger name="org.springframework.kafka" level="DEBUG" />
     <logger name="grails" level="INFO" />
+    <logger name="org.apache.kafka" level="DEBUG" additivity="false">
+        <appender-ref ref="KAFKA-FILE"/>
+    </logger>
 
 </configuration>

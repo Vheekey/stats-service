@@ -103,3 +103,16 @@ influxdb:
   bucket: plms
   username: ${INFLUXDB_USERNAME}
   password: ${INFLUXDB_PWD}
+  retention_policy: default
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: stats-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+logging:
+  level:
+#    org.springframework.kafka: DEBUG
+    stats.service: DEBUG
