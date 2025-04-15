@@ -7,7 +7,7 @@ import java.time.Instant
 @Measurement(name = "books_created")
 class BooksCreated extends InfluxEntity {
 
-    private static final MEASUREMENT_NAME = "books_created"
+    public static final MEASUREMENT_NAME = "books_created"
 
     @Column(timestamp = true)
     Instant createdAt
