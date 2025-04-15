@@ -1,7 +1,6 @@
 package stats.service
 
 import grails.gorm.transactions.Transactional
-import org.springframework.beans.factory.annotation.Autowired
 import stats.repositories.InfluxDBRepository
 import java.time.Instant
 import java.time.LocalDateTime
@@ -10,8 +9,12 @@ import java.time.format.DateTimeFormatter
 
 @Transactional
 class BookService {
-    @Autowired
-    InfluxDBRepository influxDBRepository
+
+    protected InfluxDBRepository influxDBRepository;
+
+    BookService(InfluxDBRepository influxDBRepository) {
+         this.influxDBRepository = influxDBRepository
+    }
 
     def saveBook(String bookId, String title, String author, String isbn, String status, String createdAt) {
         LocalDateTime localDateTime = LocalDateTime.parse(createdAt, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
@@ -30,5 +33,8 @@ class BookService {
         }
 
         influxDBRepository.save(booksCreated)
+        log.info("Book data saved")
+
+        return true
     }
 }
