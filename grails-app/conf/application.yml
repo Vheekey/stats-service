@@ -106,6 +106,7 @@ influxdb:
   retention_policy: default
 spring:
   kafka:
+    enable: true
     bootstrap-servers: localhost:9092
     consumer:
       group-id: stats-service

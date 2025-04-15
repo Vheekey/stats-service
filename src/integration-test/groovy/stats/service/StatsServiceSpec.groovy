@@ -16,7 +16,7 @@ class StatsServiceSpec extends GebSpec {
             go '/'
 
         then:"The title is correct"
-            title == "Welcome to Grails"
+            title == "This is the statistics service"
     }
 
 }
