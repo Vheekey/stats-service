@@ -7,5 +7,4 @@ import stats.service.InfluxDBConnectionService
 beans = {
     influxDBConnectionService(InfluxDBConnectionService)
     influxDBRepository(InfluxDBRepository)
-    kafkaConfig(KafkaConfig)
 }
