@@ -24,11 +24,11 @@ class KafkaConsumerListener {
 
     @KafkaListener(topics = "book_created", groupId = "stats-service")
     void processBooks(String message) {
-        log.info("Book created message received: "+message)
+        log.info("Book created message received: " + message)
 
         ObjectMapper objectMapper = new ObjectMapper();
         BookCreatedDTO bookCreatedDTO = objectMapper.readValue(message, BookCreatedDTO.class)
-        log.info("Book created message to save: "+bookCreatedDTO)
+        log.info("Book created message to save: " + bookCreatedDTO)
 
         bookService.saveBook(
                 bookCreatedDTO.getBookId(),
@@ -38,5 +38,32 @@ class KafkaConsumerListener {
                 bookCreatedDTO.getStatus(),
                 bookCreatedDTO.getCreatedAt()
         )
+    }
+
+    @KafkaListener(topics = "user-notifications", groupId = "stats-service")
+    void processUsers(String message) {
+        log.info("User created message received: " + message)
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map parsedMessage = objectMapper.readValue(message, Map.class)
+
+        log.info("Parsed received message: " + parsedMessage)
+
+        if (!parsedMessage instanceof Map) {
+            throw new IllegalArgumentException(
+                    "Parsed Message is not a map but instance of " + parsedMessage.getClass().getName()
+            )
+        }
+
+        UserCreatedDTO userCreatedDTO = new UserCreatedDTO();
+        userCreatedDTO.setUserId(parsedMessage.id as Integer)
+        userCreatedDTO.setEmail(parsedMessage.email as String)
+        userCreatedDTO.setRole(parsedMessage.role as String)
+        userCreatedDTO.setActive(parsedMessage.is_active as Boolean)
+        userCreatedDTO.setDateCreated(parsedMessage.created_at as String)
+
+        log.info("User created message to save: " + userCreatedDTO)
+
+        userService.saveUser(userCreatedDTO);
     }
 }

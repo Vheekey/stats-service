@@ -6,13 +6,14 @@ import java.time.Instant
 
 @Measurement(name = "users_created")
 class UsersCreated extends InfluxEntity{
-    private static final MEASUREMENT_NAME = "users_created"
+
+    public static final MEASUREMENT_NAME = "users_created"
 
     @Column(timestamp = true)
     Instant dateCreated
 
     @Column(tag = true)
-    String userId
+    Integer userId
 
     @Column(tag = true)
     String email
@@ -20,11 +21,15 @@ class UsersCreated extends InfluxEntity{
     @Column
     String name
 
+    @Column
+    Boolean active
+
     static constraints = {
         userId blank : false
         dateCreated nullable : false
         email blank: false
         name blank: false
+        active blank: false
     }
 
     @Override
