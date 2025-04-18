@@ -17,6 +17,7 @@ This service listens to events (e.g., user registrations, book creations) via **
 - Spring Kafka
 - Gradle
 - TimescaleDB (InfluxDB)
+- Spock for tests
 - Nginx
   
 ```
@@ -68,6 +69,4 @@ location /stats-service {
 ```
 
 > ⚠️ **WIP**:
-> - User-service Messages Consumption
-> - Tests with Spock for messages consumption
 > - Dockerisation
